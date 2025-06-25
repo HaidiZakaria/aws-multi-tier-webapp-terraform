@@ -1,0 +1,7 @@
+*.tfstate
+*.tfstate.backup
+.terraform/
+.crash/
+*.log
+*.bak
+*.swp
