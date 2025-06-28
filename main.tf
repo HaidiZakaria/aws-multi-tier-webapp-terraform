@@ -130,7 +130,7 @@ resource "aws_route_table_association" "private_2_assoc" {
 
 resource "aws_key_pair" "bastion_key" {
   key_name   = "bastion-key"
-  public_key = file("${path.module}/bastion_key.pub")
+  public_key = file("${path.module}/keys/bastion-key.pub")
 }
 
 # Security Group for Bastion Host
