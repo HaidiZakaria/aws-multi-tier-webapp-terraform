@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    environment {
+         AWS_ACCESS_KEY_ID = credentials('aws-access-key')
+         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key')
+         AWS_DEFAULT_REGION = 'eu-west-1'
+}
+
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/your-username/aws-multi-tier.git'
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                sh 'terraform plan -out=tfplan'
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                sh 'terraform apply -auto-approve tfplan'
+            }
+        }
+    }
+}
